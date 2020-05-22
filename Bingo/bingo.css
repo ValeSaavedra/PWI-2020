@@ -1,0 +1,25 @@
+.celdacarton {
+    width: 15px;
+    height: 35px;
+    /* background :#484848; */
+    background: coral;
+    /* margin-left: .5em; */
+    margin-left: .2em;
+    /* color : white; */
+    color: darkblue;
+    margin-top: .2em;
+}
+
+.titulocarton {
+    width: 10px;
+    height: 35px;
+    background:#484848;
+    margin-left: .2em;
+    color:white;
+    margin-top: .2em;
+
+}
+.letratitulo{
+    font-size: 15px !important;
+
+}

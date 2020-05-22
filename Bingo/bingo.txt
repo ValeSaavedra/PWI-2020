@@ -1,0 +1,7 @@
+1- Generar 2 cartones (uno del participante y otro de la compu) con un random 
+de nros de 1 al 75,  llenando columnas por quincenas, sin orden ni repeticion 
+(ej Col "B" nros del 1 al 15, Col "I" nros del 16 al 30,...etc)
+2- Abajo habría otro boton que sería el bolillero, cada vez que sale un nro 
+de los cartones, cambiar el estado (color, fondo,..) del nro que salio
+3- Cantar linea (5 puntos), diagonal (5 puntos), columna (5 puntos) 
+o bingo (10 puntos) y determinar ganador :D

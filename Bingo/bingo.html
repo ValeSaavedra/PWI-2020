@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="bingo.css" class="">
+
+</head>
+<body>
+    
+    <div class="container mt-3">
+        <div class="row justify-content-center" id="btnsParti" >
+            <div class="col-3 ">
+                <button type="button" class="btn btn-primary btn-block" id="btnSelecCarton" >Seleccionar Carton</button>
+            </div>
+            <div class="col-2 ">
+                <button type="button" class="btn btn-primary btn-block" id="btnOKCarton" >OK</button>
+            </div>
+        </div>
+
+        <!-- Carton Participante -->
+        <div class="row justify-content-center mt-3 ">
+            <div class="col-1 titulocarton d-flex align-items-center justify-content-center">
+                <h5 class="letratitulo" id="b1">B</h5>
+            </div>
+            <div class="col-1 titulocarton d-flex align-items-center justify-content-center">
+                <h5 class="letratitulo" id="i1">I</h5>
+            </div>
+            <div class="col-1 titulocarton d-flex align-items-center justify-content-center">
+                <h5 class="letratitulo" id="n1">N</h5>
+            </div>
+            <div class="col-1 titulocarton d-flex align-items-center justify-content-center">
+                <h5 class="letratitulo" id="g1">G</h5>
+            </div>
+            <div class="col-1 titulocarton d-flex align-items-center justify-content-center">
+                <h5 class="letratitulo" id="o1">O</h5>
+            </div>
+        </div>
+
+
+        <div class="row justify-content-center">
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car111"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car112"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car113"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car114"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car115"></h5>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car121"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car122"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car123"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car124"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car125"></h5>
+            </div>
+
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car131"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car132"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car133"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car134"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car135"></h5>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car141"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car142"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car143"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car144"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car145"></h5>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car151"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car152"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car153"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car154"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car155"></h5>
+            </div>
+        </div>
+        <!-- Fin Carton Participante -->
+
+        <div class="row justify-content-center mt-3" id="comienzaJue" >
+            <div class="col-2 " >
+                <button type="button" class="btn btn-primary btn-block" id="btnSacarBolilla"  >Sacar Bolilla</button>
+            </div>
+            <div class="col-1 d-flex justify-content-center mt-1" >
+                <span id="ultBolilla" class="text-center" ><strong>17</strong></span>
+                <!-- <button type="button" class="btn btn-primary btn-block" id="" ></button> -->
+            </div>
+            <div class="col-2 d-flex mt-1 ">
+                <span id="ptosParti" class="text-center" >Tus puntos: 15</span>
+                <!-- <button type="button" class="btn btn-primary btn-block" id="" ></button> -->
+            </div>
+            
+        </div>
+
+
+        <!-- Carton Compu -->
+        <div  id="cartonCompu">
+        <div class="row justify-content-center mt-3" >
+            <div class="col-1 titulocarton d-flex align-items-center justify-content-center">
+                <h5 class="letratitulo" id="b2">B</h5>
+            </div>
+            <div class="col-1 titulocarton d-flex align-items-center justify-content-center">
+                <h5 class="letratitulo" id="i2">I</h5>
+            </div>
+            <div class="col-1 titulocarton d-flex align-items-center justify-content-center">
+                <h5 class="letratitulo" id="n2">N</h5>
+            </div>
+            <div class="col-1 titulocarton d-flex align-items-center justify-content-center">
+                <h5 class="letratitulo" id="g2">G</h5>
+            </div>
+            <div class="col-1 titulocarton d-flex align-items-center justify-content-center">
+                <h5 class="letratitulo" id="o2">O</h5>
+            </div>
+        </div>
+
+
+        <div class="row justify-content-center" >
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car211"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car212"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car213"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car214"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car215"></h5>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car221"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car222"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car223"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car224"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car225"></h5>
+            </div>
+
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car231"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car232"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car233"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car234"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car235"></h5>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car241"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car242"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car243"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car244"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car245"></h5>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car251"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car252"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car253"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car254"></h5>
+            </div>
+            <div class="col-1 celdacarton d-flex align-items-center justify-content-center"> 
+                <h5 id="car255"></h5>
+            </div>
+        </div>
+        <!-- Fin Carton Compu -->
+    </div>        
+    </div>
+
+
+    <script src="bingo.js"></script>
+</body>
+</html>
