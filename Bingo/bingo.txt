@@ -1,4 +1,4 @@
-1- Generar 2 cartones (uno del participante y otro de la compu) con un random 
+1- Generar 2 cartones de 5 filas x 5 columnas (uno del participante y otro de la compu) con un random 
 de nros de 1 al 75,  llenando columnas por quincenas, sin orden ni repeticion 
 (ej Col "B" nros del 1 al 15, Col "I" nros del 16 al 30,...etc)
 2- Abajo habría otro boton que sería el bolillero, cada vez que sale un nro 
