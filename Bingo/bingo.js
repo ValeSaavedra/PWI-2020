@@ -12,20 +12,44 @@ let arrCompuCol2=[];
 let arrCompuCol3=[];
 let arrCompuCol4=[];
 let arrCompuCol5=[];
+let arrBolillas=[];
+let flgdg=false;
+let flgln=false;
+let flgcl=false;
+let cntDg1Part=0;
+let cntDg2Part=0;
+let cntDg1Compu=0;
+let cntDg2Compu=0;
+let arrLnPart=[];
+let arrLnCompu=[];
+let arrClPart=[];
+let arrClCompu=[];
+let cntBngPart=0;
+let cntBngCompu=0;
+
+
+
 const btnSelecCarton=document.getElementById("btnSelecCarton");
 const btnOKCarton=document.getElementById("btnOKCarton");
-const cartonCompu=document.getElementById("cartonCompu");
-const btnsParti=document.getElementById("btnsParti");
-const comienzaJue=document.getElementById("comienzaJue");
+const cartonCompu=document.getElementById("cartonCompu"); /**TODO EL CARTON COMPU */
+const btnsParti=document.getElementById("btnsParti");     /** BOTONES BTNSELECCARTON BTNOKCARTON */  
+const comienzaJue=document.getElementById("comienzaJue"); /** BTNSACARBOLILLA SPAN ULTBOLI SPAN PTOSPARTI */
+const btnSacarBolilla=document.getElementById("btnSacarBolilla");
+let spnPtosPart=document.getElementById("ptosPart");
+let spnPtosCompu=document.getElementById("ptosCompu");
+
 window.addEventListener('load',comienzo);
 
 
+
 function comienzo ()  {
-    cartonCompu.hidden=true;
-    comienzaJue.hidden=true;
+    // cartonCompu.hidden=true;
+    escondoElem(true,3); /* cartonCompu es el grupo 3 */
+    // comienzaJue.hidden=true;
+    escondoElem(true,2); /* comienzaJuego es el grupo 2 */
     btnSelecCarton.addEventListener("click",armoCartones);
     console.log(`Entro a comienzo`);  
-
+    inicioArrLnCol();
 }
 
 habilitarBoton = (status,boton) => {
@@ -71,20 +95,312 @@ const armoCartones = () => {
 const okCartonPart = () => {
 
     mostrarCarton(2);
-    habilitarBoton(true,1);
-    habilitarBoton(true,2);
-    cartonCompu.hidden=false;
-    btnsParti.hidden=true;
-    comienzaJue.hidden=false;
+    // habilitarBoton(true,1);
+    // habilitarBoton(true,2);
+    escondoElem(false,3); 
+    // cartonCompu.hidden=false;  
+    escondoElem(true,1);
+    // btnsParti.hidden=true;
+    escondoElem(false,2);
+    // comienzaJue.hidden=false;
+    btnSacarBolilla.addEventListener("click",sacoBolilla);
 
 }
 
+const sacoBolilla=()=>{
+// console.log(`Entramos a sacoBolilla`);
+let num;
+do {
+     num=generarAleatorio();
+    //  console.log(`while y numero es ${num}`);
+  }
+  while ((num==0) || (noEsta(num,arrBolillas)==false));
+console.log(`Bolilla ${num}`);
+arrBolillas.push(num);
+document.getElementById("ultBolilla").innerHTML  =num;
+controloDiagonal(num);
+console.log(`Estoy por entrar a controloFilas con  ${num}`);
+controloFilas(num);
+controloColumnas(num);
+controloBingo(num);  
 
-// const escondoElem
+// document.getElementById("ptosPart").innerHTML=`Tus puntos:  ${ptosPart}`;
+spnPtosPart.innerHTML=`Tus puntos:  ${ptosPart}`;
+spnPtosCompu.innerHTML=`Puntos Compu: ${ptosCompu}`;
+// spnPtosPart.value=ptosPart
+// muestroPtos(ptosPart);
+}
+
+const controloBingo=(numero)=>{
+    if(numero>=1 && numero<=15){
+        for(i=0;i<=4;i++){
+            if(arrPartCol1[i]==numero){
+                cntBngPart++;  
+                coloreoCelda(1,i+1,1);
+                i=5;
+            }
+        }
+        for(i=0;i<=4;i++){
+            if(arrCompuCol1[i]==numero){
+                cntBngCompu++;  
+                coloreoCelda(2,i+1,1);
+                i=5;
+            }
+        }
+    } 
+
+    if(numero>=16 && numero<=30){
+        for(i=0;i<=4;i++){
+            if(arrPartCol2[i]==numero){
+                cntBngPart++;  
+                coloreoCelda(1,i+1,2);
+                i=5;
+            }
+        }
+        for(i=0;i<=4;i++){
+            if(arrCompuCol2[i]==numero){
+                cntBngCompu++;  
+                coloreoCelda(2,i+1,2);
+                i=5;
+            }
+        }
+    }
+
+    if(numero>=31 && numero<=45){
+        for(i=0;i<=4;i++){
+            if(arrPartCol3[i]==numero){
+                cntBngPart++;  
+                coloreoCelda(1,i+1,3);
+                i=5;
+            }
+        }
+        for(i=0;i<=4;i++){
+            if(arrCompuCol3[i]==numero){
+                cntBngCompu++;  
+                coloreoCelda(2,i+1,3);
+                i=5;
+            }
+        }
+    }
+
+    if(numero>=46 && numero<=60){
+        for(i=0;i<=4;i++){
+            if(arrPartCol4[i]==numero){
+                cntBngPart++;  
+                coloreoCelda(1,i+1,4);
+                i=5;
+            }
+        }
+        for(i=0;i<=4;i++){
+            if(arrCompuCol4[i]==numero){
+                cntBngCompu++;  
+                coloreoCelda(2,i+1,4);
+                i=5;
+            }
+        }
+    }
+
+    if(numero>=61 && numero<=75){
+        for(i=0;i<=4;i++){
+            if(arrPartCol5[i]==numero){
+                cntBngPart++;  
+                coloreoCelda(1,i+1,5);
+                i=5;
+            }
+        }
+        for(i=0;i<=4;i++){
+            if(arrCompuCol5[i]==numero){
+                cntBngCompu++;  
+                coloreoCelda(2,i+1,5);
+                i=5;
+            }
+        }
+    }
+// BINGO DEL PARTICIPANTE //
+    if (cntBngPart==25){
+        asignoPuntos(1,10);
+    }
+// BINGO DE COMPU //    
+    if (cntBngCompu==25){
+        asignoPuntos(2,10);
+    }
+    if(cntBngPart==25 || cntBngCompu==25){
+        escondoElem(true,2);
+        alert(`Hay ganador!! Tus puntos: ${ptosPart} Puntos Compu; ${ptosCompu}`);
+    }
+}
+
+
+
+const controloColumnas=(numero)=>{
+    if(flgcl==false){
+        if(numero>=1 && numero<=15){
+            if(noEsta(numero,arrPartCol1)==false){
+                arrClPart[0]++;
+                if(arrClPart[0]==5){
+                    flgcl=true;
+                    asignoPuntos(1,5);
+                }
+            }
+            if(noEsta(numero,arrCompuCol1)==false){
+                arrClCompu[0]++;
+                if(arrClCompu[0]==5){
+                    flgcl=true;
+                    asignoPuntos(2,5);
+                }    
+            }
+        } 
+
+        if(numero>=16 && numero<=30){
+            if(noEsta(numero,arrPartCol2)==false){
+                arrClPart[1]++;
+                if(arrClPart[1]==5){
+                    flgcl=true;
+                    asignoPuntos(1,5);
+                }
+            }
+            if(noEsta(numero,arrCompuCol2)==false){
+                arrClCompu[1]++;
+                if(arrClCompu[1]==5){
+                    flgcl=true;
+                    asignoPuntos(2,5);
+                }    
+            }
+        }
+
+        if(numero>=31 && numero<=45){
+            if(noEsta(numero,arrPartCol3)==false){
+                arrClPart[2]++;
+                if(arrClPart[2]==5){
+                    flgcl=true;
+                    asignoPuntos(1,5);
+                }
+            }
+            if(noEsta(numero,arrCompuCol3)==false){
+                arrClCompu[2]++;
+                if(arrClCompu[2]==5){
+                    flgcl=true;
+                    asignoPuntos(2,5);
+                }    
+            }
+        }
+
+        if(numero>=46 && numero<=60){
+            if(noEsta(numero,arrPartCol4)==false){
+                arrClPart[3]++;
+                if(arrClPart[3]==5){
+                    flgcl=true;
+                    asignoPuntos(1,5);
+                }
+            }
+            if(noEsta(numero,arrCompuCol4)==false){
+                arrClCompu[3]++;
+                if(arrClCompu[3]==5){
+                    flgcl=true;
+                    asignoPuntos(2,5);
+                }    
+            }
+        }
+
+        if(numero>=61 && numero<=75){
+            if(noEsta(numero,arrPartCol5)==false){
+                arrClPart[4]++;
+                if(arrClPart[4]==5){
+                    flgcl=true;
+                    asignoPuntos(1,5);
+                }
+            }
+            if(noEsta(numero,arrCompuCol5)==false){
+                arrClCompu[4]++;
+                if(arrClCompu[4]==5){
+                    flgcl=true;
+                    asignoPuntos(2,5);
+                }    
+            }
+        }
+        
+    } /** cierro if flg */
+} /** cierro funcion */
+
+
+function controloFilas(numero){
+    console.log(`Entre a controloFilas con ${numero}`);
+    if (flgln==false){
+        console.log(`Entre a flgln en false con ${numero}`);
+        for(i=0;i<=4;i++){
+            console.log(`Entre al for de controloFilas con ${numero}`);
+            if(arrPartCol1[i]==numero || arrPartCol2[i]==numero || arrPartCol3[i]==numero || arrPartCol4[i]==numero || arrPartCol5[i]==numero){
+                arrLnPart[i]++;
+                if(arrLnPart[i]==5){
+                    flgln=true;
+                    asignoPuntos(1,5);
+                    i=5;
+                }
+            }
+        
+            if(arrCompuCol1[i]==numero || arrCompuCol2[i]==numero || arrCompuCol3[i]==numero || arrCompuCol4[i]==numero || arrCompuCol5[i]==numero){
+                arrLnCompu[i]++;
+                if(arrLnCompu[i]==5){
+                    flgln=true;
+                    asignoPuntos(2,5);
+                    i=5;
+                }
+            }
+
+        }
+
+    }
+}
+
+
+const controloDiagonal=(numero)=>{
+    if (flgdg==false){
+        if (arrPartCol1[0]==numero || arrPartCol2[1]==numero || arrPartCol3[2]==numero ||arrPartCol4[3]==numero || arrPartCol5[4]==numero){
+            cntDg1Part++;
+            if (cntDg1Part==5){
+                flgdg=true;
+                asignoPuntos(1,5);
+                console.log(`llego a diagonal1 el part`);
+            }
+        }
+        if (arrCompuCol1[0]==numero || arrCompuCol2[1]==numero || arrCompuCol3[2]==numero ||arrCompuCol4[3]==numero || arrCompuCol5[4]==numero){
+            cntDg1Compu++;
+            if (cntDg1Compu==5){
+                flgdg=true;
+                asignoPuntos(2,5);
+                console.log(`llego a diagonal1 el compu`);
+            }
+        }    
+    
+        if (arrPartCol1[4]==numero || arrPartCol2[3]==numero || arrPartCol3[2]==numero ||arrPartCol4[1]==numero || arrPartCol5[0]==numero){
+            cntDg2Part++;
+            if (cntDg2Part==5){
+                flgdg=true;
+                asignoPuntos(1,5);
+                console.log(`llego a diagonal2 el part`);
+            }
+        }
+        if (arrCompuCol1[4]==numero || arrCompuCol2[3]==numero || arrCompuCol3[2]==numero ||arrCompuCol4[1]==numero || arrCompuCol5[0]==numero){
+            cntDg2Compu++;
+            if (cntDg2Compu==5){
+                flgdg=true;
+                asignoPuntos(2,5);
+                console.log(`llego a diagonal2 el compu`);
+            }
+        }    
+    
+    }
+
+}
+
+// QUIEN 1=PARTICIPANTE 2=COMPU //
+const asignoPuntos=(quien,cuantos)=>{    
+    (quien==1)?(ptosPart=ptosPart+cuantos):(ptosCompu=ptosCompu+cuantos);
+}
 
 mostrarCarton = (carton)=>{
     if (carton==1 ){
-    
+        
         document.getElementById("car111").innerHTML=arrPartCol1[0];
         document.getElementById("car112").innerHTML=arrPartCol2[0];
         document.getElementById("car113").innerHTML=arrPartCol3[0];
@@ -215,3 +531,115 @@ limpiarArr =(jugador) =>{
 
 }
 
+const escondoElem=(status,grupElem)=>{
+    switch(grupElem){
+        case 1:
+            btnsParti.hidden = status;
+            break;
+        case 2:   
+            comienzaJue.hidden = status;
+            break;
+        case 3:
+            cartonCompu.hidden=status;
+            break;            
+        }
+
+}
+
+const coloreoCelda=(carton,fila,columna)=>{
+    if (carton==1) {
+        if (fila==1){
+            if (columna==1){document.getElementById("caja111").style.backgroundColor="lightgreen";}
+            if (columna==2){document.getElementById("caja112").style.backgroundColor="lightgreen";}
+            if (columna==3){document.getElementById("caja113").style.backgroundColor="lightgreen";}
+            if (columna==4){document.getElementById("caja114").style.backgroundColor="lightgreen";}
+            if (columna==5){document.getElementById("caja115").style.backgroundColor="lightgreen";}
+        }
+        if (fila==2){
+            if (columna==1){document.getElementById("caja121").style.backgroundColor="lightgreen";}
+            if (columna==2){document.getElementById("caja122").style.backgroundColor="lightgreen";}
+            if (columna==3){document.getElementById("caja123").style.backgroundColor="lightgreen";}
+            if (columna==4){document.getElementById("caja124").style.backgroundColor="lightgreen";}
+            if (columna==5){document.getElementById("caja125").style.backgroundColor="lightgreen";}
+        }
+        if (fila==3){
+            if (columna==1){document.getElementById("caja131").style.backgroundColor="lightgreen";}
+            if (columna==2){document.getElementById("caja132").style.backgroundColor="lightgreen";}
+            if (columna==3){document.getElementById("caja133").style.backgroundColor="lightgreen";}
+            if (columna==4){document.getElementById("caja134").style.backgroundColor="lightgreen";}
+            if (columna==5){document.getElementById("caja135").style.backgroundColor="lightgreen";}
+        }
+        if (fila==4){
+            if (columna==1){document.getElementById("caja141").style.backgroundColor="lightgreen";}
+            if (columna==2){document.getElementById("caja142").style.backgroundColor="lightgreen";}
+            if (columna==3){document.getElementById("caja143").style.backgroundColor="lightgreen";}
+            if (columna==4){document.getElementById("caja144").style.backgroundColor="lightgreen";}
+            if (columna==5){document.getElementById("caja145").style.backgroundColor="lightgreen";}
+        }
+        if (fila==5){
+            if (columna==1){document.getElementById("caja151").style.backgroundColor="lightgreen";}
+            if (columna==2){document.getElementById("caja152").style.backgroundColor="lightgreen";}
+            if (columna==3){document.getElementById("caja153").style.backgroundColor="lightgreen";}
+            if (columna==4){document.getElementById("caja154").style.backgroundColor="lightgreen";}
+            if (columna==5){document.getElementById("caja155").style.backgroundColor="lightgreen";}
+        }
+    }
+    else{
+        if (fila==1){
+            if (columna==1){document.getElementById("caja211").style.backgroundColor="lightgreen";}
+            if (columna==2){document.getElementById("caja212").style.backgroundColor="lightgreen";}
+            if (columna==3){document.getElementById("caja213").style.backgroundColor="lightgreen";}
+            if (columna==4){document.getElementById("caja214").style.backgroundColor="lightgreen";}
+            if (columna==5){document.getElementById("caja215").style.backgroundColor="lightgreen";}
+        }
+        if (fila==2){
+            if (columna==1){document.getElementById("caja221").style.backgroundColor="lightgreen";}
+            if (columna==2){document.getElementById("caja222").style.backgroundColor="lightgreen";}
+            if (columna==3){document.getElementById("caja223").style.backgroundColor="lightgreen";}
+            if (columna==4){document.getElementById("caja224").style.backgroundColor="lightgreen";}
+            if (columna==5){document.getElementById("caja225").style.backgroundColor="lightgreen";}
+        }
+        if (fila==3){
+            if (columna==1){document.getElementById("caja231").style.backgroundColor="lightgreen";}
+            if (columna==2){document.getElementById("caja232").style.backgroundColor="lightgreen";}
+            if (columna==3){document.getElementById("caja233").style.backgroundColor="lightgreen";}
+            if (columna==4){document.getElementById("caja234").style.backgroundColor="lightgreen";}
+            if (columna==5){document.getElementById("caja235").style.backgroundColor="lightgreen";}
+        }
+        if (fila==4){
+            if (columna==1){document.getElementById("caja241").style.backgroundColor="lightgreen";}
+            if (columna==2){document.getElementById("caja242").style.backgroundColor="lightgreen";}
+            if (columna==3){document.getElementById("caja243").style.backgroundColor="lightgreen";}
+            if (columna==4){document.getElementById("caja244").style.backgroundColor="lightgreen";}
+            if (columna==5){document.getElementById("caja245").style.backgroundColor="lightgreen";}
+        }
+        if (fila==5){
+            if (columna==1){document.getElementById("caja251").style.backgroundColor="lightgreen";}
+            if (columna==2){document.getElementById("caja252").style.backgroundColor="lightgreen";}
+            if (columna==3){document.getElementById("caja253").style.backgroundColor="lightgreen";}
+            if (columna==4){document.getElementById("caja254").style.backgroundColor="lightgreen";}
+            if (columna==5){document.getElementById("caja255").style.backgroundColor="lightgreen";}
+        }
+
+
+
+    }
+
+
+    
+console.log(`Coloreo celda`);
+
+}
+
+const inicioArrLnCol=()=>{
+    for (i=0;i<=4;i++){
+        arrClPart.push(0);
+        arrClCompu.push(0);
+        arrLnPart.push(0);
+        arrLnCompu.push(0);
+    }
+}
+
+// const muestroPtos=(puntosParti)=>{
+//     spnPtosParti
+// }
