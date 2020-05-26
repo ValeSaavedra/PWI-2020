@@ -35,8 +35,9 @@ const cartonCompu=document.getElementById("cartonCompu"); /**TODO EL CARTON COMP
 const btnsParti=document.getElementById("btnsParti");     /** BOTONES BTNSELECCARTON BTNOKCARTON */  
 const comienzaJue=document.getElementById("comienzaJue"); /** BTNSACARBOLILLA SPAN ULTBOLI SPAN PTOSPARTI */
 const btnSacarBolilla=document.getElementById("btnSacarBolilla");
-let spnPtosPart=document.getElementById("ptosPart");
-let spnPtosCompu=document.getElementById("ptosCompu");
+const cajaMensajes=document.getElementById("cajaMensajes"); /** SPAN MENSAJE Y SPAN CARTONCOMPU */
+let msjCartonParti=document.getElementById("msjCartonParti");
+let msjPtosCompu=document.getElementById("msjCartonCompu");
 
 window.addEventListener('load',comienzo);
 
@@ -47,6 +48,7 @@ function comienzo ()  {
     escondoElem(true,3); /* cartonCompu es el grupo 3 */
     // comienzaJue.hidden=true;
     escondoElem(true,2); /* comienzaJuego es el grupo 2 */
+    escondoElem(true,4);
     btnSelecCarton.addEventListener("click",armoCartones);
     console.log(`Entro a comienzo`);  
     inicioArrLnCol();
@@ -59,6 +61,9 @@ habilitarBoton = (status,boton) => {
         break;
     case 2:   
         btnOKCarton.disabled = status;
+        break;
+    case 3:
+        btnSacarBolilla.disabled=status;
         break;
     }
 }
@@ -103,6 +108,7 @@ const okCartonPart = () => {
     // btnsParti.hidden=true;
     escondoElem(false,2);
     // comienzaJue.hidden=false;
+    escondoElem(false,4);
     btnSacarBolilla.addEventListener("click",sacoBolilla);
 
 }
@@ -110,6 +116,7 @@ const okCartonPart = () => {
 const sacoBolilla=()=>{
 // console.log(`Entramos a sacoBolilla`);
 let num;
+avisoResultados("");
 do {
      num=generarAleatorio();
     //  console.log(`while y numero es ${num}`);
@@ -125,13 +132,13 @@ controloColumnas(num);
 controloBingo(num);  
 
 // document.getElementById("ptosPart").innerHTML=`Tus puntos:  ${ptosPart}`;
-spnPtosPart.innerHTML=`Tus puntos:  ${ptosPart}`;
-spnPtosCompu.innerHTML=`Puntos Compu: ${ptosCompu}`;
+// spnPtosPart.innerHTML=`Tus puntos:  ${ptosPart}`;
+// spnPtosCompu.innerHTML=`Puntos Compu: ${ptosCompu}`;
 // spnPtosPart.value=ptosPart
 // muestroPtos(ptosPart);
 }
 
-const controloBingo=(numero)=>{
+const controloBingo=(numero)=>{    
     if(numero>=1 && numero<=15){
         for(i=0;i<=4;i++){
             if(arrPartCol1[i]==numero){
@@ -219,14 +226,22 @@ const controloBingo=(numero)=>{
 // BINGO DEL PARTICIPANTE //
     if (cntBngPart==25){
         asignoPuntos(1,10);
+        avisoResultados("Han Cantado Bingo!");    
     }
 // BINGO DE COMPU //    
     if (cntBngCompu==25){
         asignoPuntos(2,10);
+        avisoResultados("Han Cantado Bingo!");
     }
     if(cntBngPart==25 || cntBngCompu==25){
-        escondoElem(true,2);
-        alert(`Hay ganador!! Tus puntos: ${ptosPart} Puntos Compu; ${ptosCompu}`);
+        habilitarBoton(true,3);
+        document.getElementById("btnSacarBolilla").style.backgroundColor="red";
+        document.getElementById("btnSacarBolilla").innerHTML="Bingo";
+        // btnSacarBolilla="Bingo";
+        // btnSacarBolilla.style.color="red";
+        // escondoElem(true,2);
+        // alert(`Tus puntos: ${ptosPart}  Compu: ${ptosCompu}`);
+        avisoResultados(`Tus puntos: ${ptosPart}  Compu: ${ptosCompu}`);
     }
 }
 
@@ -240,6 +255,7 @@ const controloColumnas=(numero)=>{
                 if(arrClPart[0]==5){
                     flgcl=true;
                     asignoPuntos(1,5);
+                    avisoResultados("Columna: 5 puntos!");
                 }
             }
             if(noEsta(numero,arrCompuCol1)==false){
@@ -247,6 +263,7 @@ const controloColumnas=(numero)=>{
                 if(arrClCompu[0]==5){
                     flgcl=true;
                     asignoPuntos(2,5);
+                    avisoResultados("Columna: 5 puntos!");
                 }    
             }
         } 
@@ -257,6 +274,7 @@ const controloColumnas=(numero)=>{
                 if(arrClPart[1]==5){
                     flgcl=true;
                     asignoPuntos(1,5);
+                    avisoResultados("Columna: 5 puntos!!");
                 }
             }
             if(noEsta(numero,arrCompuCol2)==false){
@@ -264,6 +282,7 @@ const controloColumnas=(numero)=>{
                 if(arrClCompu[1]==5){
                     flgcl=true;
                     asignoPuntos(2,5);
+                    avisoResultados("Columna: 5 puntos!");
                 }    
             }
         }
@@ -274,6 +293,7 @@ const controloColumnas=(numero)=>{
                 if(arrClPart[2]==5){
                     flgcl=true;
                     asignoPuntos(1,5);
+                    avisoResultados("Columna: 5 puntos!");
                 }
             }
             if(noEsta(numero,arrCompuCol3)==false){
@@ -281,7 +301,8 @@ const controloColumnas=(numero)=>{
                 if(arrClCompu[2]==5){
                     flgcl=true;
                     asignoPuntos(2,5);
-                }    
+                    avisoResultados("Columna: 5 puntos!"); 
+                }   
             }
         }
 
@@ -291,6 +312,7 @@ const controloColumnas=(numero)=>{
                 if(arrClPart[3]==5){
                     flgcl=true;
                     asignoPuntos(1,5);
+                    avisoResultados("Columna: 5 puntos!");
                 }
             }
             if(noEsta(numero,arrCompuCol4)==false){
@@ -308,6 +330,7 @@ const controloColumnas=(numero)=>{
                 if(arrClPart[4]==5){
                     flgcl=true;
                     asignoPuntos(1,5);
+                    avisoResultados("Columna: 5 puntos!!");
                 }
             }
             if(noEsta(numero,arrCompuCol5)==false){
@@ -315,6 +338,7 @@ const controloColumnas=(numero)=>{
                 if(arrClCompu[4]==5){
                     flgcl=true;
                     asignoPuntos(2,5);
+                    avisoResultados("Columna: 5 puntos!");
                 }    
             }
         }
@@ -334,6 +358,7 @@ function controloFilas(numero){
                 if(arrLnPart[i]==5){
                     flgln=true;
                     asignoPuntos(1,5);
+                    avisoResultados("Línea: 5 puntos!");
                     i=5;
                 }
             }
@@ -343,6 +368,7 @@ function controloFilas(numero){
                 if(arrLnCompu[i]==5){
                     flgln=true;
                     asignoPuntos(2,5);
+                    avisoResultados("Línea: 5 puntos!");
                     i=5;
                 }
             }
@@ -360,6 +386,7 @@ const controloDiagonal=(numero)=>{
             if (cntDg1Part==5){
                 flgdg=true;
                 asignoPuntos(1,5);
+                avisoResultados("Diagonal: 5 puntos!");
                 console.log(`llego a diagonal1 el part`);
             }
         }
@@ -368,6 +395,7 @@ const controloDiagonal=(numero)=>{
             if (cntDg1Compu==5){
                 flgdg=true;
                 asignoPuntos(2,5);
+                avisoResultados("Diagonal: 5 puntos!");
                 console.log(`llego a diagonal1 el compu`);
             }
         }    
@@ -377,6 +405,7 @@ const controloDiagonal=(numero)=>{
             if (cntDg2Part==5){
                 flgdg=true;
                 asignoPuntos(1,5);
+                avisoResultados("Diagonal: 5 puntos!");
                 console.log(`llego a diagonal2 el part`);
             }
         }
@@ -385,6 +414,7 @@ const controloDiagonal=(numero)=>{
             if (cntDg2Compu==5){
                 flgdg=true;
                 asignoPuntos(2,5);
+                avisoResultados("Diagonal: 5 puntos!");
                 console.log(`llego a diagonal2 el compu`);
             }
         }    
@@ -541,7 +571,10 @@ const escondoElem=(status,grupElem)=>{
             break;
         case 3:
             cartonCompu.hidden=status;
-            break;            
+            break;      
+        case 4:
+            cajaMensajes.hidden=status;        
+            break;          
         }
 
 }
@@ -639,7 +672,7 @@ const inicioArrLnCol=()=>{
         arrLnCompu.push(0);
     }
 }
-
+const avisoResultados=(mensaje)=>{document.getElementById("mensaje").innerHTML=mensaje}
 // const muestroPtos=(puntosParti)=>{
 //     spnPtosParti
 // }
