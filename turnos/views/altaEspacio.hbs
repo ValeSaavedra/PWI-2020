@@ -1,0 +1,54 @@
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+        <a class="navbar-brand" style="color: white;">Alta de Espacio</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><span class="nav-link">{{bienvenida}}</span></li>                
+              <li class="nav-item cta"><a href="/admin/espacio" class="nav-link mr-2"><span>Volver a Panel Espacios</span></a></li>  
+	          <li class="nav-item cta"><a href="/login/logout" class="nav-link"><span>Cerrar Sesion</span></a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+<div class="hero-wrap js-fullheight img" style="background-image: url(/images/bg_1.jpg);">
+      <div class="overlay"></div>
+
+    <div class="container" style="margin-top:15vh;">
+        <div class="row justify-content-center ">
+            <div class="col-12" >
+                {{!-- <h5 style="color: white;">Alta de Espacio</h5> --}}
+                <span class="text-danger">{{mensaje}}</span>
+            </div>
+            <div class="col-8">
+                
+                <form method="POST" action="/admin/espacio/alta" class="bg-light p-3 contact-form" >
+
+                    <div class="form-group">                        
+                        <input required type="text" name="nombre" id="nombre" placeholder="nombre" class="form-control">
+                    </div>
+                    <div class="form-group">                        
+                        <textarea type="text" rows=6 name="descripcion" id="descripcion"  placeholder="descripcion" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">                        
+                        <input required type="number" name="cupo" id="cupo" placeholder="cupo (para consultorios oprima 1)"  class="form-control">
+                    </div>
+                    <select class="form-control" name="id_catego_espac">
+                        {{!-- <option value="0" selected disabled>Seleccioná la categoria</option> --}}
+                        {{#each cateEspacio}}
+                        <option value="{{id}}">{{nombre}}</option>
+                        {{/each}}
+                    </select>                    
+
+                    <button type="submit" class="btn btn-primary btn-block" style="background-color: lightgreen;">Agregar espacio</button>
+                    
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

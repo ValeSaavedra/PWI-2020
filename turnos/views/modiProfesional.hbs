@@ -1,0 +1,61 @@
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+          <a class="navbar-brand" style="color: white;">Modificacion de Profesional</a>  
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><span class="nav-link">{{bienvenida}}</span></li>                
+              <li class="nav-item cta"><a href="/admin/profesional" class="nav-link mr-2"><span>Volver a Panel Profesionales</span></a></li>  
+	          <li class="nav-item cta"><a href="/login/logout" class="nav-link"><span>Cerrar Sesion</span></a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+<div class="hero-wrap js-fullheight img" style="background-image: url(/images/bg_1.jpg);">
+      <div class="overlay"></div>
+
+    <div class="container" style="margin-top:15vh;">
+        <div class="row justify-content-center ">
+            <div class="col-12" >
+                {{!-- <h5 style="color: white;">Modificacion de profesional</h5> --}}
+                <span class="text-danger">{{mensaje}}</span>
+            </div>
+            <div class="col-8">
+                
+                <form method="POST" action="/admin/profesional/modificar/{{profesionalModi.id}}" class="bg-light p-3 contact-form" >
+
+                    <div class="form-group">                        
+                        <input required type="text" value="{{profesionalModi.nombre}}" name="nombre" id="nombre" placeholder="nombre" class="form-control">
+                    </div>
+                    <div class="form-group">                        
+                        <input required type="text" value="{{profesionalModi.apellido}}" name="apellido" id="apellido"  placeholder="apellido" class="form-control">
+                    </div>
+                    <div class="form-group">                        
+                        <input required type="email" value="{{profesionalModi.correo}}" name="correo" id="correo" placeholder="correo"  class="form-control">
+                    </div>
+                    <div class="form-group">                        
+                        <input type="number" value="{{profesionalModi.telefono}}" name="telefono" id="telefono"  placeholder="telefono" class="form-control">
+                    </div>                    
+                    <div class="form-group">                        
+                        <input type="number" value="{{profesionalModi.cuit}}" name="cuit" id="cuit"  placeholder="cuit (sin guiones)" class="form-control">
+                    </div>                                        
+                    <select class="form-control" name="id_catego_profes">
+                        {{!-- <option value="0" selected disabled>Seleccioná la categoria</option> --}}
+                        <option value="{{profesionalModi.id_catego_profes}}">{{profesionalModi.categoria}}</option>
+                        {{#each cateProfesional}}
+                        <option value="{{id}}">{{nombre}}</option>
+                        {{/each}}
+                    </select>                    
+
+                    <button type="submit" class="btn btn-primary btn-block" style="background-color: lightgreen;">Agregar profesional</button>
+                    
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>   

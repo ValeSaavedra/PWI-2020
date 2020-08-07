@@ -1,0 +1,94 @@
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" style="color: white;">Panel Profesionales</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><span class="nav-link">{{bienvenida}}</span></li>  
+              <li class="nav-item cta"><a href="/admin/profesional/alta" class="nav-link mr-2"><span>Agregar Profesional</span></a></li>  
+              <li class="nav-item cta"><a href="/admin/index" class="nav-link mr-2"><span>Volver a Admin</span></a></li>  
+	          <li class="nav-item cta"><a href="/login/logout" class="nav-link"><span>Cerrar Sesion</span></a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+        <div class="hero-wrap js-fullheight img" style="background-image: url(/images/bg_1.jpg);">
+      <div class="overlay"></div>
+      <div class="container-fluid px-0">
+        <div class="row d-md-flex no-gutters slider-text align-items-center js-fullheight justify-content-center">
+          <div class="col-md-8 text-center d-flex align-items-center ftco-animate js-fullheight">
+            <div class="text mt-5">
+                  <div class="row block-9 justify-content-center mb-5">
+                      <div class="col-md-12 mb-md-5 mt-4 ">
+                          <table class="table table-hover table-responsive mt-3 text-center " id="tabla1">
+                              <thead>
+                                  <tr>                                        
+                                      <th>Nombre</th>
+                                      <th>Apellido</th>
+                                      <th>Categoria</th>
+                                      <th>Correo</th>
+                                      <th>Habilitar/Deshabilitar</th>
+                                      <th></th>
+                                  </tr>
+                              </thead>
+                              <tbody style="background-color: white;">
+                                  {{#each profesional}}
+                                  <tr id="{{id}}">                                        
+                                      <td>{{nombre}}</td>
+                                      <td>{{apellido}}</td>
+                                      <td>{{categoria}}</td>
+                                      <td>{{correo}}</td>
+                                      <td>
+                                        {{#if habilitado}}
+                                         <i class="fas fa-times text-danger"  style="cursor:pointer" onclick="habilitar(0,{{id}})"></i>                                          
+                                        {{else}}
+                                          <i class="fas fa-check text-success" style="cursor:pointer" onclick="habilitar(1,{{id}})"></i>
+                                        {{/if}}
+                                      </td>
+                                      <td>
+                                        {{#if habilitado}}
+                                          <a href="/admin/profesional/modi/{{id}}"><i class="fas fa-cogs pr-3 pl-3" style="color: lightgreen;"> Modificar</i></a>
+                                        {{else}}
+                                          <i class="fas fa-cogs pr-3 pl-3" style="color:lightgrey"> Modificar</i>
+                                        {{/if}}
+                                      </td>
+                                  </tr>
+                                              {{!--  XMLHTTPRequest  --}}
+                                  {{/each}}
+                              </tbody>
+                          </table>
+
+                      </div>
+                
+                  </div>
+
+
+            </div>
+          </div>
+        </div>  
+      </div>
+    </div>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script>
+		const habilitar=(habilitado,id)=>{
+      console.log(id);
+      console.log(habilitado);
+      fetch(`/admin/profesional/baja/${id}/${habilitado}`,{
+        
+        method:'PUT'
+        
+        })
+          .then((response)=>response.json())
+          .then(data=>message(data))
+		};
+    const message=(datos)=>{
+      if (datos.success) {
+        window.location.reload();
+      }
+    };
+
+	</script>    
