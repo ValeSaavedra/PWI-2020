@@ -19,6 +19,7 @@ const adminCateProfesRouter=require('./routes/admin/cateProfes');
 const adminEspacioRouter=require('./routes/admin/espacio');
 const adminProfesionalRouter=require('./routes/admin/profesional');
 const adminAsignacionRouter=require('./routes/admin/asignacion');
+const tomarRouter=require('./routes/tomar');
 
 var app = express();
 
@@ -49,10 +50,18 @@ seguAdmin=(req,res,next)=>{
   }
 };
 
-// seguUsu=(req,res)=>{
-
-
-// };
+seguUsu=(req,res,next)=>{
+  try {
+    if (req.session.admin==1 || req.session.admin==0){
+      next();
+    }
+    else {
+      res.redirect('/login');
+    }
+  } catch(error){
+    console.log(error);
+  }
+};
 
 
 app.use('/', indexRouter);
@@ -67,6 +76,8 @@ app.use('/admin/cateProfes',seguAdmin,adminCateProfesRouter);
 app.use('/admin/espacio',seguAdmin,adminEspacioRouter);
 app.use('/admin/profesional',seguAdmin,adminProfesionalRouter);
 app.use('/admin/asignacion',seguAdmin,adminAsignacionRouter);
+app.use('/tomar',seguUsu,tomarRouter);
+//app.use('/tomar',tomarRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

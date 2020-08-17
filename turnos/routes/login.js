@@ -43,7 +43,7 @@ router.post('/', async(req,res)=>{
             else {
                 // usuario simple
                 console.log("usuario simple");
-                res.end();
+                res.redirect('/tomar');
             }
         }
         else {
