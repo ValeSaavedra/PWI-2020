@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `agenda`;
 CREATE TABLE `agenda` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_espac_prof` int(11) NOT NULL,
+  `id_prof` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `dia` date NOT NULL,
   `hora` varchar(5) COLLATE utf8_spanish2_ci NOT NULL,
@@ -32,6 +33,8 @@ CREATE TABLE `agenda` (
   `creador` int(11) NOT NULL,
   `habilitado` tinyint(1) DEFAULT 1,
   `ts_create` datetime DEFAULT current_timestamp(),
+  `fecha` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `asistio` tinyint(1) DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `fk_agenda_espac_prof1_idx` (`id_espac_prof`),
   KEY `fk_agenda_usuario1_idx` (`id_usuario`),
@@ -39,7 +42,7 @@ CREATE TABLE `agenda` (
   CONSTRAINT `fk_agenda_espac_prof1` FOREIGN KEY (`id_espac_prof`) REFERENCES `espac_prof` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_agenda_usuario1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_agenda_usuario2` FOREIGN KEY (`creador`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,6 +51,7 @@ CREATE TABLE `agenda` (
 
 LOCK TABLES `agenda` WRITE;
 /*!40000 ALTER TABLE `agenda` DISABLE KEYS */;
+INSERT INTO `agenda` VALUES (2,4,1,2,'2020-09-04','10:00',1,1,1,'2020-08-11 11:08:24','04/09/2020',0),(3,4,1,1,'2020-09-04','10:15',0,1,1,'2020-08-11 16:18:14','04/09/2020',0),(4,4,1,2,'2020-09-04','10:30',1,1,1,'2020-08-11 16:18:14','04/09/2020',0),(5,4,1,1,'2020-09-04','10:45',0,1,1,'2020-08-11 16:18:14','04/09/2020',0),(6,4,1,1,'2020-09-04','11:00',0,1,1,'2020-08-11 16:18:14','04/09/2020',0),(7,4,1,1,'2020-09-04','11:15',0,1,1,'2020-08-11 16:18:14','04/09/2020',0),(8,4,1,1,'2020-09-04','11:30',0,1,1,'2020-08-11 16:18:14','04/09/2020',0),(9,4,1,1,'2020-09-04','11:45',0,1,1,'2020-08-11 16:18:14','04/09/2020',0),(10,7,1,1,'2020-09-09','20:00',0,1,1,'2020-08-11 16:18:14','09/09/2020',0),(11,7,1,1,'2020-09-09','20:15',0,1,1,'2020-08-11 16:18:14','09/09/2020',0),(12,7,1,1,'2020-09-09','20:30',0,1,1,'2020-08-11 16:18:14','09/09/2020',0),(13,7,1,1,'2020-09-09','20:45',0,1,1,'2020-08-11 16:18:14','09/09/2020',0),(14,8,5,1,'2020-09-07','12:00',0,1,1,'2020-08-11 16:18:14','07/09/2020',0),(15,8,5,1,'2020-09-07','12:15',0,1,1,'2020-08-11 16:18:14','07/09/2020',0),(16,8,5,1,'2020-09-07','12:30',0,1,1,'2020-08-11 16:18:14','07/09/2020',0),(17,8,5,1,'2020-09-07','12:45',0,1,1,'2020-08-11 16:18:14','07/09/2020',0),(18,4,1,2,'2020-08-18','20:00',1,1,1,'2020-08-18 17:20:55','18/08/2020',0);
 /*!40000 ALTER TABLE `agenda` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +102,7 @@ CREATE TABLE `catego_profes` (
   PRIMARY KEY (`id`),
   KEY `fk_catego_profes_usuario1_idx` (`id_usuario`),
   CONSTRAINT `fk_catego_profes_usuario1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +111,7 @@ CREATE TABLE `catego_profes` (
 
 LOCK TABLES `catego_profes` WRITE;
 /*!40000 ALTER TABLE `catego_profes` DISABLE KEYS */;
-INSERT INTO `catego_profes` VALUES (1,1,'Grupo 1','Grupo de Profesionales nº 1 (Gr1)',1,'2020-07-31 00:38:22');
+INSERT INTO `catego_profes` VALUES (1,1,'Odontologia','Grupo de Profesionales de Odontologia General',1,'2020-07-31 00:38:22'),(2,1,'Ginecologia','Grupo de Profesionales de Ginecologia',1,'2020-08-10 20:40:51');
 /*!40000 ALTER TABLE `catego_profes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +140,7 @@ CREATE TABLE `espac_prof` (
   CONSTRAINT `fk_espac_prof_espacio1` FOREIGN KEY (`id_espacio`) REFERENCES `espacio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_espac_prof_profesional1` FOREIGN KEY (`id_prof`) REFERENCES `profesional` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_espac_prof_usuario1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +149,7 @@ CREATE TABLE `espac_prof` (
 
 LOCK TABLES `espac_prof` WRITE;
 /*!40000 ALTER TABLE `espac_prof` DISABLE KEYS */;
-INSERT INTO `espac_prof` VALUES (4,1,1,1,'VIE','10:00','12:00',15,1,'2020-08-07 00:13:10'),(7,1,1,1,'MIE','16:00','21:00',15,1,'2020-08-07 01:49:41');
+INSERT INTO `espac_prof` VALUES (4,1,1,1,'VIE','10:00','12:00',15,1,'2020-08-07 00:13:10'),(7,1,1,1,'MIE','16:00','21:00',15,1,'2020-08-07 01:49:41'),(8,1,5,1,'LUN','12:00','17:00',15,1,'2020-08-11 00:17:57');
 /*!40000 ALTER TABLE `espac_prof` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,7 +210,7 @@ CREATE TABLE `profesional` (
   KEY `fk_profesional_usuario1_idx` (`id_usuario`),
   CONSTRAINT `fk_profesional_catego_profes1` FOREIGN KEY (`id_catego_profes`) REFERENCES `catego_profes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_profesional_usuario1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +219,7 @@ CREATE TABLE `profesional` (
 
 LOCK TABLES `profesional` WRITE;
 /*!40000 ALTER TABLE `profesional` DISABLE KEYS */;
-INSERT INTO `profesional` VALUES (1,1,1,'Sergio','Pérez','correo@correo.com',0,0,1,'2020-08-01 19:21:34');
+INSERT INTO `profesional` VALUES (1,1,1,'Sergio','Pérez','correo@correo.com',0,0,1,'2020-08-01 19:21:34'),(5,1,1,'Emma','Leal','kuky@correo.com',1122,1234,1,'2020-08-10 12:55:02'),(6,2,1,'Emilia','Montenegro','emimonte@correo.com',112233,4321,1,'2020-08-10 16:00:49'),(7,1,1,'Gabriela','Lopez','gabu@correo.com',0,0,1,'2020-08-12 13:43:25');
 /*!40000 ALTER TABLE `profesional` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,7 +254,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,1111,'1','valeriacsaavedra@gmail.com','Vale','','','','',1,1,'2020-07-29 16:34:06'),(2,222222,'222222','correo@correo.com','Otro','','','','',0,0,'2020-08-07 01:25:07'),(3,3333333,'3333333','correoveo@correo.com','aaaaa','','','','',0,0,'2020-08-07 01:25:41'),(4,4444444,'4444444','correo1@correo.com','bbbb','','','','',0,1,'2020-08-07 01:29:54'),(5,555555,'555555','correo6@correo.com','sssss','','','','',0,1,'2020-08-07 01:35:27');
+INSERT INTO `usuario` VALUES (1,1111,'1','valeriacsaavedra@gmail.com','Vale','','','','',1,1,'2020-07-29 16:34:06'),(2,222222,'2','valeriasaavedra@live.com.ar','Feliz','','','','',0,1,'2020-08-07 01:25:07'),(3,3333333,'3333333','correoveo@correo.com','aaaaa','','','','',0,0,'2020-08-07 01:25:41'),(4,4444444,'4444444','correo1@correo.com','bbbb','','','','',0,1,'2020-08-07 01:29:54'),(5,555555,'555555','correo6@correo.com','sssss','','','','',0,1,'2020-08-07 01:35:27');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,4 +300,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-07 19:59:08
+-- Dump completed on 2020-08-18 18:19:21
