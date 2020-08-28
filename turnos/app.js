@@ -20,6 +20,7 @@ const adminEspacioRouter=require('./routes/admin/espacio');
 const adminProfesionalRouter=require('./routes/admin/profesional');
 const adminAsignacionRouter=require('./routes/admin/asignacion');
 const tomarRouter=require('./routes/tomar');
+const adminReservasRouter=require('./routes/admin/reservas');
 
 var app = express();
 
@@ -76,7 +77,9 @@ app.use('/admin/cateProfes',seguAdmin,adminCateProfesRouter);
 app.use('/admin/espacio',seguAdmin,adminEspacioRouter);
 app.use('/admin/profesional',seguAdmin,adminProfesionalRouter);
 app.use('/admin/asignacion',seguAdmin,adminAsignacionRouter);
+app.use('/admin/reservas',seguAdmin,adminReservasRouter);
 app.use('/tomar',seguUsu,tomarRouter);
+
 //app.use('/tomar',tomarRouter);
 
 // catch 404 and forward to error handler
